@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "target": "esnext",
+    "resolveJsonModule": true,
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "strict": true,
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "skipDefaultLibCheck": true,
+    "useDefineForClassFields": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false
+  },
+  "include": ["src"],
+  "exclude": ["**/node_modules/**"]
+}
