@@ -1,9 +1,6 @@
 export type ListNodeToStringCallback<T> = (value: T) => string;
 export type ListNodeComparator<T> = (current: T, toCompare: T) => boolean;
 
-type ListNodeValue<T> = T | null;
-type ListNodeNext<T> = ListNode<T> | null;
-
 interface IListNode<T> {
   toString(callback?: ListNodeToStringCallback<T>): string;
   isEqual(value: T, comparator?: ListNodeComparator<T>): boolean;
@@ -15,14 +12,14 @@ export class ListNode<T> implements IListNode<T> {
   next: ListNode<T> | null;
 
   // Creates a [ListNode]
-  constructor(value: ListNodeValue<T> = null, next: ListNodeNext<T> = null) {
+  constructor(value: T | null = null, next: ListNode<T> | null = null) {
     this.value = value;
     this.next = next;
   }
 
   // Print [ListNode] value
   toString(callback?: ListNodeToStringCallback<T>) {
-    if (!this.value) return '';
+    if (!this.value) return "";
     return callback ? callback(this.value) : `${this.value}`;
   }
 

@@ -9,6 +9,7 @@ export interface ILinkedList<T> {
   append(value: T): void;
   prepend(value: T): void;
   delete(value: T): ListNode<T> | null;
+  search(value: T, comparator?: ListNodeComparator<T>): ListNode<T> | null;
   toString(callback?: ListNodeToStringCallback<T>): void;
 }
 
@@ -17,20 +18,48 @@ type LinkedListProps<T> = ListNode<T> | null;
 // Linked List
 export class LinkedList<T> implements ILinkedList<T> {
   head: LinkedListProps<T>;
-  tail: LinkedListProps<T>;
 
   /// Creates a [LinkedList]
   constructor(head: LinkedListProps<T> = null) {
     this.head = head;
-    this.tail = this.head;
+  }
+
+  /// Get [LinkedList] size
+  get size() {
+    let amount = 0;
+
+    if (!this.isEmpty()) {
+      let currentNode: ListNode<T> | null = this.head;
+
+      while (currentNode) {
+        amount++;
+        currentNode = currentNode.next;
+      }
+    }
+
+    return amount;
+  }
+
+  /// Search for a Node inside the [LinkedList]
+  search(value: T, comparator?: ListNodeComparator<T>): ListNode<T> | null {
+    if (this.isEmpty()) return null;
+
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.isEqual(value, comparator)) return currentNode;
+      currentNode = currentNode.next;
+    }
+
+    return null;
   }
 
   // [prepend] methods adds a [ListNode] object to the beginning of [LinkedList].
   prepend(value: T) {
-    const newNode = new ListNode<T>(value, this.head);
-    this.head = newNode;
+    let newNode = new ListNode<T>(value, this.head);
+    newNode.next = this.head;
 
-    if (!this.tail) this.tail = newNode;
+    this.head = newNode;
   }
 
   // [append] methods adds a [ListNode] object to the end of [LinkedList].
@@ -39,20 +68,17 @@ export class LinkedList<T> implements ILinkedList<T> {
 
     if (this.isEmpty()) {
       this.head = newNode;
-      this.tail = newNode;
-
       return;
     }
 
-    // const currentTail = this.tail!;
-    // currentTail.next = newNode;
-    this.tail!.next = newNode;
-    this.tail = this.tail!.next;
+    let tail = this.head!;
+    while (tail.next !== null) tail = tail.next;
+
+    tail.next = newNode;
   }
 
   // [delete] methods finds an item in the [LinkedList] and removes it.
   delete(value: T, comparator?: ListNodeComparator<T>): ListNode<T> | null {
-    // First we check if our [LinkedList] is empty.
     if (this.isEmpty()) return null;
 
     let deletedNode: ListNode<T> | null = null;
@@ -62,9 +88,9 @@ export class LinkedList<T> implements ILinkedList<T> {
       this.head = this.head.next;
     }
 
-    let currentNode = this.head;
+    let currentNode = this.head!;
 
-    while (currentNode?.next) {
+    while (currentNode.next !== null) {
       if (currentNode.next.isEqual(value, comparator)) {
         deletedNode = currentNode.next;
         currentNode.next = currentNode.next.next;
@@ -73,9 +99,6 @@ export class LinkedList<T> implements ILinkedList<T> {
       }
     }
 
-    if (this.tail?.isEqual(value, comparator)) {
-      this.tail = currentNode;
-    }
 
     return deletedNode;
   }
@@ -85,13 +108,9 @@ export class LinkedList<T> implements ILinkedList<T> {
 
     let currentNode = this.head;
 
-    while (currentNode?.next) {
+    while (currentNode) {
       console.log(currentNode.toString(callback));
       currentNode = currentNode.next;
-    }
-
-    if (this.tail) {
-      console.log(this.tail.toString(callback));
     }
   }
 
