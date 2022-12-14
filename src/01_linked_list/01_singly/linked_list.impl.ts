@@ -1,6 +1,5 @@
 import { LinkedList } from "./linked_list";
 
-// Create an [LinkedList]
 const linkedList = new LinkedList<number>();
 
 linkedList.append(1);
@@ -18,11 +17,11 @@ linkedList.toString();
 console.log('\nDelete item:');
 console.log(linkedList.delete(23))
 
-/// Print all values in the linked list after deletion
-linkedList.toString();
+/// Print all values in the [LinkedList]
+linkedList.toPrint(linkedList.list);
 
 console.log(`\nSearch for an existing item: ${linkedList.search(7)}`);
 
 console.log(`\nSearch for an un-existing item: ${linkedList.search(100)}`);
 
-console.log(`\nLinkedList has ${linkedList.size} nodes.`)
+console.log(`\nLinkedList has ${linkedList.size} nodes.`);

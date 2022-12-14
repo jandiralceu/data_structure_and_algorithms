@@ -1,19 +1,21 @@
 import {
-  ListNode,
   ListNodeComparator,
   ListNodeToStringCallback,
-} from "@/00_helpers/list_node";
+} from "@/00_helpers";
+import { Node } from "./node";
 
-export interface ILinkedList<T> {
+interface ILinkedList<T> {
   isEmpty(): boolean;
   append(value: T): void;
   prepend(value: T): void;
   delete(value: T): T | null;
-  search(value: T, comparator?: ListNodeComparator<T>): ListNode<T> | null;
+  clean(): void;
+  search(value: T, comparator?: ListNodeComparator<T>): Node<T> | null;
   toString(callback?: ListNodeToStringCallback<T>): void;
+  toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void;
 }
 
-type LinkedListProps<T> = ListNode<T> | null;
+type LinkedListProps<T> = Node<T> | null;
 
 // Linked List
 export class LinkedList<T> implements ILinkedList<T> {
@@ -44,8 +46,8 @@ export class LinkedList<T> implements ILinkedList<T> {
     return amount;
   }
 
-  /// Search for a Node inside the [LinkedList]
-  search(value: T, comparator?: ListNodeComparator<T>): ListNode<T> | null {
+  /// Search for a [Node] inside the [LinkedList] 
+  search(value: T, comparator?: ListNodeComparator<T>): Node<T> | null {
     if (this.isEmpty()) return null;
 
     let currentNode = this.#head;
@@ -58,17 +60,17 @@ export class LinkedList<T> implements ILinkedList<T> {
     return null;
   }
 
-  // [prepend] methods adds a [ListNode] object to the beginning of [LinkedList].
+  // prepend methods adds a [Node] object to the beginning of [LinkedList].
   prepend(value: T) {
-    let newNode = new ListNode<T>(value, this.#head);
+    let newNode = new Node<T>(value, this.#head);
     newNode.next = this.#head;
 
     this.#head = newNode;
   }
 
-  // [append] methods adds a [ListNode] object to the end of [LinkedList].
+  // append methods adds a [Node] object to the end of [LinkedList].
   append(value: T) {
-    const newNode = new ListNode<T>(value);
+    const newNode = new Node<T>(value);
 
     if (this.isEmpty()) {
       this.#head = newNode;
@@ -76,16 +78,16 @@ export class LinkedList<T> implements ILinkedList<T> {
     }
 
     let tail = this.#head!;
-    while (tail.next !== null) tail = tail.next;
+    while (tail.next) tail = tail.next;
 
     tail.next = newNode;
   }
 
-  // [delete] methods finds an item in the [LinkedList] and removes it.
+  // delete methods finds an item in the [LinkedList] and removes it.
   delete(value: T, comparator?: ListNodeComparator<T>): T | null {
     if (this.isEmpty()) return null;
 
-    let deletedNode: ListNode<T> | null = null;
+    let deletedNode: Node<T> | null = null;
 
     while (this.#head?.isEqual(value, comparator)) {
       deletedNode = this.#head;
@@ -107,18 +109,22 @@ export class LinkedList<T> implements ILinkedList<T> {
     return deletedNode?.value ?? null;
   }
 
-  toString(callback?: ListNodeToStringCallback<T>) {
-    if (this.isEmpty()) return;
+  // Print [LinkedList] values, but using recursion
+  toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void {
+    if (!value) return;
 
-    let currentNode = this.#head;
+    console.log(value.toString(callback));
 
-    while (currentNode) {
-      console.log(currentNode.toString(callback));
-      currentNode = currentNode.next;
-    }
+    this.toPrint(value.next, callback);
   }
-
+  
+  // Check if [LinkedList] is empty
   isEmpty() {
     return !this.#head;
+  }
+
+  // Clean the [LinkedList]
+  clean(): void {
+    this.#head = null;
   }
 }
