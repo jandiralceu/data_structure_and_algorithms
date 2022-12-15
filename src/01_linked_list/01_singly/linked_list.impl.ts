@@ -25,3 +25,30 @@ console.log(`\nSearch for an existing item: ${linkedList.search(7)}`);
 console.log(`\nSearch for an un-existing item: ${linkedList.search(100)}`);
 
 console.log(`\nLinkedList has ${linkedList.size} nodes.`);
+
+console.log(`\nDelete the last node: ${linkedList.deleteTail()}.`);
+
+/// Print all values in the [LinkedList]
+linkedList.toPrint(linkedList.list);
+
+console.log(`\nDelete the first node: ${linkedList.deleteHead()}.`);
+
+/// Print all values in the [LinkedList]
+linkedList.toPrint(linkedList.list);
+
+console.log('');
+
+// Insert a node in position 2
+linkedList.insertPosition(2, 200);
+
+/// Print all values in the [LinkedList]
+linkedList.toPrint(linkedList.list);
+
+console.log('');
+
+
+// Insert a node in position 2
+linkedList.insertPosition(4, 900);
+
+/// Print all values in the [LinkedList]
+linkedList.toPrint(linkedList.list);

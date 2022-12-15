@@ -8,16 +8,18 @@ interface ILinkedList<T> {
   isEmpty(): boolean;
   append(value: T): void;
   prepend(value: T): void;
+  insertPosition(position: number, value: T): void;
   delete(value: T): T | null;
+  deleteHead(): T | null;
+  deleteTail(): T | null;
   clean(): void;
   search(value: T, comparator?: ListNodeComparator<T>): Node<T> | null;
-  toString(callback?: ListNodeToStringCallback<T>): void;
   toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void;
 }
 
 type LinkedListProps<T> = Node<T> | null;
 
-// Linked List
+// Singly [LinkedList]
 export class LinkedList<T> implements ILinkedList<T> {
   #head: LinkedListProps<T>;
 
@@ -83,7 +85,27 @@ export class LinkedList<T> implements ILinkedList<T> {
     tail.next = newNode;
   }
 
-  // delete methods finds an item in the [LinkedList] and removes it.
+  // Insert a [Node] into any position of [LinkedList]
+  insertPosition(position: number, value: T): void {
+    if (position > this.size) return;
+
+    const newNode = new Node<T>(value);
+
+    if (position == 1) {
+      newNode.next = this.#head;
+      this.#head = newNode;
+      return;
+    }
+
+    let current = this.#head;
+
+    for (let i = 1; i <= position - 2 && current; i++) current = current.next;
+
+    newNode.next = current?.next!;
+    current!.next = newNode;
+  }
+
+  // delete any value, in any position of out [LinkedList] based on params.
   delete(value: T, comparator?: ListNodeComparator<T>): T | null {
     if (this.isEmpty()) return null;
 
@@ -109,7 +131,31 @@ export class LinkedList<T> implements ILinkedList<T> {
     return deletedNode?.value ?? null;
   }
 
-  // Print [LinkedList] values, but using recursion
+  // Delete the first element of a [LinkedList]
+  deleteHead(): T | null {
+    if (this.isEmpty()) return null;
+
+    const deletedNode = this.#head!.value;
+    this.#head = this.#head!.next;
+
+    return deletedNode;
+  }
+
+  // Delete the last element of a [LinkedList]
+  deleteTail(): T | null {
+    if (!this.#head || !this.#head.next) return null;
+
+    let current = this.#head!;
+
+    while(current.next?.next) current = current.next;
+
+    const deletedNode = current.next!;
+    current.next = null;
+
+    return deletedNode?.value;
+  }
+
+  // Print [LinkedList] values
   toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void {
     if (!value) return;
 
