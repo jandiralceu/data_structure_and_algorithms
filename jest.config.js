@@ -10,7 +10,8 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
-    '!<rootDir>/src/**/*.impl.ts'
+    '!<rootDir>/src/**/*.impl.ts',
+    '!<rootDir>/src/**/index.ts'
   ],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
