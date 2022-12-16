@@ -4,6 +4,9 @@ import {
 } from "@/00_helpers";
 import { Node } from "./node";
 
+type Key = number;
+type LinkedListProps<T> = Node<T> | null;
+type SearchResult<T> = [Key, T?];
 interface ILinkedList<T> {
   isEmpty(): boolean;
   append(value: T): void;
@@ -13,11 +16,9 @@ interface ILinkedList<T> {
   deleteHead(): T | null;
   deleteTail(): T | null;
   clean(): void;
-  search(value: T, comparator?: ListNodeComparator<T>): Node<T> | null;
+  search(list: LinkedListProps<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T>;
   toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void;
 }
-
-type LinkedListProps<T> = Node<T> | null;
 
 // Singly [LinkedList]
 export class LinkedList<T> implements ILinkedList<T> {
@@ -49,17 +50,18 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   /// Search for a [Node] inside the [LinkedList] 
-  search(value: T, comparator?: ListNodeComparator<T>): Node<T> | null {
-    if (this.isEmpty()) return null;
+  search(list: LinkedListProps<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T> {
+    if (!list) return [-1];
 
-    let currentNode = this.#head;
-
-    while (currentNode) {
-      if (currentNode.isEqual(value, comparator)) return currentNode;
-      currentNode = currentNode.next;
+    if (list.isEqual(value, comparator)) {
+      return [1, list.value!];
     }
+    else {
+      const [index, result] = this.search(list.next, value);
 
-    return null;
+      if (index === -1) return [-1];
+      else return [index + 1, result];
+    }
   }
 
   // prepend methods adds a [Node] object to the beginning of [LinkedList].
