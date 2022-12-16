@@ -1,0 +1,7 @@
+# Javascript
+dist
+node_modules
+
+# Editors
+.idea
+.vscode

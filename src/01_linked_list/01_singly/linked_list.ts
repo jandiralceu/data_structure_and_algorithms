@@ -7,6 +7,7 @@ import { Node } from "./node";
 type Key = number;
 type LinkedListProps<T> = Node<T> | null;
 type SearchResult<T> = [Key, T?];
+
 interface ILinkedList<T> {
   isEmpty(): boolean;
   append(value: T): void;

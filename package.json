@@ -1,15 +1,47 @@
 {
-  "name": "data_structure",
+  "name": "data_structure_algorithms",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
+  "author": {
+    "name": "Jandir A. Cutabiala",
+    "email": "me@jandir.co",
+    "url": "https://jandir.co"
+  },
+  "description": "Data Structure and Algorithms with Typescript",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "jest",
+    "data structure",
+    "algorithms"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jandiralceu/data_structure_and_algorithms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jandiralceu/data_structure_and_algorithms/issues",
+    "email": "me@jandir.co"
+  },
   "scripts": {
     "build": "tsc && tsc-alias",
-    "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\""
+    "lint": "",
+    "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
+    "test": "jest"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
     "concurrently": "^7.6.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^24.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "jest": "^29.3.1",
+    "prettier": "2.8.1",
+    "ts-jest": "^29.0.3",
     "tsc-alias": "^1.8.2",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.4"
   }
 }

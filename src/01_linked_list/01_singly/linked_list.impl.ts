@@ -46,7 +46,6 @@ linkedList.toPrint(linkedList.list);
 
 console.log('');
 
-
 // Insert a node in position 2
 linkedList.insertPosition(4, 900);
 
