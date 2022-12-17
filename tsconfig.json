@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "allowJs": false,
     "esModuleInterop": true,
     "module": "CommonJS",
     "moduleResolution": "node",
@@ -9,7 +9,7 @@
     "paths": {
       "@/*": ["*"]
     },
-    "target": "esnext",
+    "target": "ES2016",
     "resolveJsonModule": true,
     "outDir": "./dist/",
     "noImplicitAny": true,

@@ -30,6 +30,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@types/node": "^18.11.16",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "concurrently": "^7.6.0",
     "eslint": "^8.0.1",

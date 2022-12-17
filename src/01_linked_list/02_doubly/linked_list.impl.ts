@@ -11,21 +11,21 @@ linkedList.append("Last Name");
 
 linkedList.toPrint(linkedList.values);
 
-console.log('\nDelete the first node');
+console.log("\nDelete the first node");
 linkedList.deleteHead();
 linkedList.toPrint(linkedList.values);
 
-console.log('\nDelete the last node');
+console.log("\nDelete the last node");
 linkedList.deleteTail();
 linkedList.toPrint(linkedList.values);
 
-let reverse = linkedList.reverse();
+const reverse = linkedList.reverse();
 
-if (reverse) {
+if (reverse != null) {
   let current: Node<string> | null = reverse;
 
   console.log(`\nThe reverse Linked List: `);
-  while (current) {
+  while (current != null) {
     current.toString();
     current = current.next;
   }

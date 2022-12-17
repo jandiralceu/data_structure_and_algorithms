@@ -12,31 +12,37 @@ linkedList.prepend(40);
 linkedList.append(23);
 
 console.log(linkedList.list);
-linkedList.toString();
+linkedList.toPrint(linkedList.list);
 
-console.log('\nDelete item:');
-console.log(linkedList.delete(23))
+console.log("\nDelete item:");
+console.log(linkedList.delete(23));
 
 /// Print all values in the [LinkedList]
 linkedList.toPrint(linkedList.list);
 
-console.log(`\nSearch for an existing item: ${linkedList.search(linkedList.list, 1)}`);
+const [itemPosition, itemFound] = linkedList.search(linkedList.list, 1);
+console.log(`\nSearch for an existing item:`);
+console.log(`Position: `, itemPosition);
+console.log(`Result: `, itemFound);
 
-console.log(`\nSearch for an un-existing item: ${linkedList.search(linkedList.list, 100)}`);
+const notFoundItem = linkedList.search(linkedList.list, 100);
+console.log(`\nSearch for an un-existing item: `, notFoundItem[0]);
 
 console.log(`\nLinkedList has ${linkedList.size} nodes.`);
 
-console.log(`\nDelete the last node: ${linkedList.deleteTail()}.`);
+const deletedTail = linkedList.deleteTail();
+console.log(`\nDelete the last node: `, deletedTail);
 
 /// Print all values in the [LinkedList]
 linkedList.toPrint(linkedList.list);
 
-console.log(`\nDelete the first node: ${linkedList.deleteHead()}.`);
+const deletedFirstNode = linkedList.deleteHead();
+console.log(`\nDelete the first node: `, deletedFirstNode);
 
 /// Print all values in the [LinkedList]
 linkedList.toPrint(linkedList.list);
 
-console.log('');
+console.log("");
 
 // Insert a node in position 2
 linkedList.insertPosition(2, 200);
@@ -44,7 +50,7 @@ linkedList.insertPosition(2, 200);
 /// Print all values in the [LinkedList]
 linkedList.toPrint(linkedList.list);
 
-console.log('');
+console.log("");
 
 // Insert a node in position 2
 linkedList.insertPosition(4, 900);

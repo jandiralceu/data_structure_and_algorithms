@@ -1,7 +1,7 @@
 import { ListNodeComparator, ListNodeToStringCallback } from "@/00_helpers";
 
 import { Node } from "./node";
-export interface ILinkedList<T> {
+interface ILinkedList<T> {
   isEmpty(): boolean;
   clean(): void;
   append(value: T): void;
@@ -88,7 +88,7 @@ export class LinkedList<T> implements ILinkedList<T> {
 
     return deletedNode;
   }
-  
+
   deleteTail(): T | null {
     if (this.isEmpty()) return null;
 
@@ -100,7 +100,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     }
 
     let current = this.#head;
-    while(current.next) current = current.next;
+    while (current.next) current = current.next;
 
     const deletedNode = current.next!;
     current.prev!.next = null;
@@ -114,6 +114,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   ): void {
     if (!value) return;
     value.toString(callback);
+
     this.toPrint(value.next, callback);
   }
 
