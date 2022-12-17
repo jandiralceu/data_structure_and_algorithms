@@ -11,6 +11,14 @@ linkedList.append("Last Name");
 
 linkedList.toPrint(linkedList.values);
 
+console.log('\nDelete the first node');
+linkedList.deleteHead();
+linkedList.toPrint(linkedList.values);
+
+console.log('\nDelete the last node');
+linkedList.deleteTail();
+linkedList.toPrint(linkedList.values);
+
 let reverse = linkedList.reverse();
 
 if (reverse) {

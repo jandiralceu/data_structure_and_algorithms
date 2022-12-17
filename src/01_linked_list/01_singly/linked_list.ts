@@ -146,7 +146,14 @@ export class LinkedList<T> implements ILinkedList<T> {
 
   // Delete the last element of a [LinkedList]
   deleteTail(): T | null {
-    if (!this.#head || !this.#head.next) return null;
+    if (this.isEmpty()) return null;
+
+    if (!this.#head?.next) {
+      const deletedNode = this.#head!.value
+      this.clean();
+
+      return deletedNode;
+    }
 
     let current = this.#head!;
 
