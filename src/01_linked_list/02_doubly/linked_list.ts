@@ -5,12 +5,9 @@ import {
 
   import { Node } from './node';
   export interface ILinkedList<T> {
-    isEmpty(): boolean;
-    // append(value: T): void;
+    append(value: T): void;
     prepend(value: T): void;
-    // delete(value: T): T | null;
-    // search(value: T, comparator?: ListNodeComparator<T>): DoublyNode<T> | null;
-    // toString(callback?: ListNodeToStringCallback<T>): void;
+    reverse(): LinkedListProps<T>;
     toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void;
   }
   
@@ -27,9 +24,21 @@ import {
     get values() {
       return this.#head;
     }
-    
-    isEmpty() {
-      return !this.#head;
+
+    append(value: T): void {
+      const newNode = new Node<T>(value);
+
+      if (!this.#head) {
+        this.#head = newNode;
+        return;
+      }
+
+      let tail = this.#head;
+
+      while(tail.next) tail = tail.next;
+
+      newNode.prev = tail;
+      tail.next = newNode;
     }
     
     prepend(value: T): void {
@@ -39,10 +48,26 @@ import {
       if (this.#head) this.#head.prev = newNode;
       this.#head = newNode;
     }
+
+    reverse(): LinkedListProps<T> {
+      if (!this.#head || !this.#head.next) return this.#head;
+
+      let prev: LinkedListProps<T> = null;
+      let current: LinkedListProps<T> =  this.#head;
+
+      while (current) {
+        prev = current.prev;
+        current.prev = current.next;
+        current.next = prev;
+        current = current.prev;
+      }
+
+      return prev?.prev ?? null;
+    }
     
     toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void {
       if (!value) return;
-      console.log(value.toString(callback));
+      value.toString(callback);
       this.toPrint(value.next, callback);
     }
   }

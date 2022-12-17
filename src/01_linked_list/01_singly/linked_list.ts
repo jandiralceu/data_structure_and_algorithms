@@ -5,7 +5,7 @@ import {
 import { Node } from "./node";
 
 type Key = number;
-type LinkedListProps<T> = Node<T> | null;
+type Pointer<T> = Node<T> | null;
 type SearchResult<T> = [Key, T?];
 
 interface ILinkedList<T> {
@@ -17,15 +17,15 @@ interface ILinkedList<T> {
   deleteHead(): T | null;
   deleteTail(): T | null;
   clean(): void;
-  search(list: LinkedListProps<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T>;
-  toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void;
+  search(list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T>;
+  toPrint(value: Pointer<T>, callback?: ListNodeToStringCallback<T>): void;
 }
 
 // Singly [LinkedList]
 export class LinkedList<T> implements ILinkedList<T> {
-  #head: LinkedListProps<T>;
+  #head: Pointer<T>;
 
-  constructor(head: LinkedListProps<T> = null) {
+  constructor(head: Pointer<T> = null) {
     this.#head = head;
   }
 
@@ -51,7 +51,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   /// Search for a [Node] inside the [LinkedList] 
-  search(list: LinkedListProps<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T> {
+  search(list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T> {
     if (!list) return [-1];
 
     if (list.isEqual(value, comparator)) {
@@ -159,7 +159,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   // Print [LinkedList] values
-  toPrint(value: LinkedListProps<T>, callback?: ListNodeToStringCallback<T>): void {
+  toPrint(value: Pointer<T>, callback?: ListNodeToStringCallback<T>): void {
     if (!value) return;
 
     console.log(value.toString(callback));
