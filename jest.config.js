@@ -4,24 +4,21 @@
  */
 
 module.exports = {
-  roots: ['<rootDir>/src'],
+  roots: ["<rootDir>/src"],
   clearMocks: true,
-  coverageDirectory: 'coverage',
+  coverageDirectory: "coverage",
   collectCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.ts',
-    '!<rootDir>/src/**/*.impl.ts',
-    '!<rootDir>/src/**/index.ts'
+    "<rootDir>/src/**/*.ts",
+    "!<rootDir>/src/**/*.impl.ts",
+    "!<rootDir>/src/**/index.ts",
   ],
-  testPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '<rootDir>/dist'
-  ],
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/dist"],
   moduleNameMapper: {
-    '@/(.*)': '<rootDir>/src/$1'
+    "@/(.*)": "<rootDir>/src/$1",
   },
   transform: {
-    '.+\\.(ts)$': 'ts-jest'
+    ".+\\.(ts)$": "ts-jest",
   },
 
   // Indicates whether the coverage information should be collected while executing the test
@@ -36,7 +33,7 @@ module.exports = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: 'v8',
+  coverageProvider: "v8",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -185,4 +182,4 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-}
+};

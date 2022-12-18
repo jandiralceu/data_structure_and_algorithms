@@ -113,7 +113,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     current.next = newNode;
   }
 
-  // delete any value, in any position of out [LinkedList] based on params.
+  // delete any value, in any position of the [LinkedList].
   delete(value: T, comparator?: ListNodeComparator<T>): T | null {
     if (this.#head == null) return null;
 
