@@ -13,6 +13,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "sort-imports": "warn",
     "@typescript-eslint/no-non-null-assertion": "off"
   }
 }

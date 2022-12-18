@@ -1,6 +1,6 @@
 import { ListNodeToStringCallback } from "@/00_helpers";
-
 import { Node } from "./node";
+
 interface ILinkedList<T> {
   clean: () => void;
   append: (value: T) => void;
