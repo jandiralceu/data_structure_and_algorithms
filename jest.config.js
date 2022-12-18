@@ -7,10 +7,11 @@ module.exports = {
   roots: ["<rootDir>/src"],
   clearMocks: true,
   coverageDirectory: "coverage",
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     "<rootDir>/src/**/*.ts",
     "!<rootDir>/src/**/*.impl.ts",
+    "!<rootDir>/src/**/*.types.ts",
     "!<rootDir>/src/**/index.ts",
   ],
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/dist"],
@@ -34,15 +35,6 @@ module.exports = {
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
-
-  // A list of reporter names that Jest uses when writing coverage reports
-  // coverageReporters: [
-  //   "json",
-  //   "text",
-  //   "lcov",
-  //   "clover"
-  // ],
-
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
 
