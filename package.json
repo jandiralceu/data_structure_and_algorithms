@@ -7,13 +7,14 @@
     "email": "me@jandir.co",
     "url": "https://jandir.co"
   },
-  "description": "Data Structure and Algorithms with Typescript",
+  "description": "Data Structure and Algorithms",
   "keywords": [
     "javascript",
     "typescript",
     "jest",
     "data structure",
-    "algorithms"
+    "algorithms",
+    "interviews"
   ],
   "repository": {
     "type": "git",
