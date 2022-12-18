@@ -1,4 +1,4 @@
-import { ListNodeComparator, ListNodeToStringCallback } from "@/00_helpers";
+import { ListNodeComparator } from "@/00_helpers";
 import { Node } from "./node";
 
 type Key = number;
@@ -13,12 +13,8 @@ interface ILinkedList<T> {
   deleteHead: () => T | null;
   deleteTail: () => T | null;
   clean: () => void;
-  search: (
-    list: Pointer<T>,
-    value: T,
-    comparator?: ListNodeComparator<T>
-  ) => SearchResult<T>;
-  toPrint: (value: Pointer<T>, callback?: ListNodeToStringCallback<T>) => void;
+  search: (list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>) => SearchResult<T>;
+  toPrint: (value: Pointer<T>) => void;
 }
 
 // Singly [LinkedList]
@@ -31,6 +27,16 @@ export class LinkedList<T> implements ILinkedList<T> {
 
   get list(): Pointer<T> {
     return this.#head;
+  }
+
+  get tail(): Pointer<T> {
+    if (this.#head == null) return null;
+
+    let current = this.#head;
+
+    while (current.next != null) current = current.next;
+
+    return current;
   }
 
   get size(): number {
@@ -49,11 +55,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   /// Search for a [Node] inside the [LinkedList]
-  search(
-    list: Pointer<T>,
-    value: T,
-    comparator?: ListNodeComparator<T>
-  ): SearchResult<T> {
+  search(list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T> {
     if (list == null) return [-1];
 
     if (list.isEqual(value, comparator)) {
@@ -170,11 +172,11 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   // Print [LinkedList] values
-  toPrint(value: Pointer<T>, callback?: ListNodeToStringCallback<T>): void {
+  toPrint(value: Pointer<T>): void {
     if (value == null) return;
-    value.toString(callback);
+    console.log(value.toString());
 
-    this.toPrint(value.next, callback);
+    this.toPrint(value.next);
   }
 
   // Clean the [LinkedList]
