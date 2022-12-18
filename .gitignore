@@ -1,6 +1,14 @@
+# Node / Yarn / NPM
 node_modules
-dist
-.DS_STORE
 *error.log
+
+# Generated Files
+dist
+coverage
+
+# System
+.DS_STORE
+
+# Editors
 .vscode
 .idea

@@ -1,5 +1,6 @@
-# Javascript
+# Generated Files
 dist
+coverage
 node_modules
 
 # Editors
