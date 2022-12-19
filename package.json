@@ -7,13 +7,14 @@
     "email": "me@jandir.co",
     "url": "https://jandir.co"
   },
-  "description": "Data Structure and Algorithms with Typescript",
+  "description": "Data Structure and Algorithms",
   "keywords": [
     "javascript",
     "typescript",
     "jest",
     "data structure",
-    "algorithms"
+    "algorithms",
+    "interviews"
   ],
   "repository": {
     "type": "git",
@@ -39,7 +40,9 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "@faker-js/faker": "^7.6.0",
     "@types/jest": "^29.2.4",
+    "@types/node": "^18.11.17",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "commitizen": "^4.2.6",
     "concurrently": "^7.6.0",

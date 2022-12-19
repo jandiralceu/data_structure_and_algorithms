@@ -1,17 +1,13 @@
-import { ListNodeToStringCallback } from "@/00_helpers";
 import { Node } from "./node";
 
 interface ILinkedList<T> {
   clean: () => void;
   append: (value: T) => void;
   prepend: (value: T) => void;
-  reverse: () => LinkedListProps<T>;
+  reverse: () => LinkedList<T>;
   deleteHead: () => T | null;
   deleteTail: () => T | null;
-  toPrint: (
-    value: LinkedListProps<T>,
-    callback?: ListNodeToStringCallback<T>
-  ) => void;
+  toPrint: (value: LinkedListProps<T>) => void;
 }
 
 type LinkedListProps<T> = Node<T> | null;
@@ -26,6 +22,21 @@ export class LinkedList<T> implements ILinkedList<T> {
 
   get values(): LinkedListProps<T> {
     return this.#head;
+  }
+
+  get size(): number {
+    let amount = 0;
+
+    if (this.#head != null) {
+      let currentNode: Node<T> | null = this.#head;
+
+      while (currentNode != null) {
+        amount++;
+        currentNode = currentNode.next;
+      }
+    }
+
+    return amount;
   }
 
   append(value: T): void {
@@ -52,8 +63,8 @@ export class LinkedList<T> implements ILinkedList<T> {
     this.#head = newNode;
   }
 
-  reverse(): LinkedListProps<T> {
-    if (this.#head == null || this.#head.next == null) return this.#head;
+  reverse(): LinkedList<T> {
+    if (this.#head == null || this.#head.next == null) return new LinkedList<T>(this.#head);
 
     let prev: LinkedListProps<T> = null;
     let current: LinkedListProps<T> = this.#head;
@@ -65,7 +76,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       current = current.prev;
     }
 
-    return prev!.prev;
+    return new LinkedList<T>(prev!.prev);
   }
 
   deleteHead(): T | null {
@@ -103,14 +114,11 @@ export class LinkedList<T> implements ILinkedList<T> {
     return deletedNode;
   }
 
-  toPrint(
-    value: LinkedListProps<T>,
-    callback?: ListNodeToStringCallback<T>
-  ): void {
+  toPrint(value: LinkedListProps<T>): void {
     if (value == null) return;
-    value.toString(callback);
+    console.log(value.toString());
 
-    this.toPrint(value.next, callback);
+    this.toPrint(value.next);
   }
 
   clean(): void {

@@ -1,8 +1,4 @@
-import {
-  IListNode,
-  ListNodeComparator,
-  ListNodeToStringCallback,
-} from "@/00_helpers/list_node.types";
+import { IListNode, ListNodeComparator } from "@/00_helpers/list_node.types";
 
 export class Node<T> implements IListNode<T> {
   value: T;
@@ -13,15 +9,11 @@ export class Node<T> implements IListNode<T> {
     this.next = next;
   }
 
-  toString(callback?: ListNodeToStringCallback<T>): void {
-    typeof callback !== "undefined"
-      ? callback(this.value)
-      : console.log(this.value);
+  toString(): string {
+    return `${this.value as string}`;
   }
 
   isEqual(value: T, comparator?: ListNodeComparator<T>): boolean {
-    return typeof comparator !== "undefined"
-      ? comparator(this.value, value)
-      : this.value === value;
+    return typeof comparator !== "undefined" ? comparator(this.value, value) : this.value === value;
   }
 }
