@@ -1,10 +1,10 @@
 import { LinkedList } from "./linked_list";
 import { Node } from "./node";
-import { Person } from "../../00_helpers";
 
+import { Person } from "@/00_helpers";
 import { faker } from "@faker-js/faker";
 
-describe("Singly [LinkedList] - Primitive values", () => {
+describe("Singly [LinkedList]", () => {
   it("should create an empty [LinkedList]", () => {
     const linkedList = new LinkedList<number>();
 
