@@ -93,8 +93,6 @@ export class LinkedList<T> implements ILinkedList<T> {
 
   // Insert a [Node] into any position of [LinkedList]
   insertPosition(position: number, value: T): void {
-    if (position > this.size) return;
-
     const newNode = new Node<T>(value);
 
     if (position === 1) {

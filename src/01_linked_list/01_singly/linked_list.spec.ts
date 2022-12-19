@@ -155,6 +155,18 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.size).toBe(5);
   });
 
+  it("should insert a [Node] in the end of the [LinkedList]", () => {
+    const linkedList = new LinkedList<number>();
+
+    linkedList.append(+faker.random.numeric(5));
+    linkedList.append(+faker.random.numeric(5));
+    linkedList.append(+faker.random.numeric(5));
+
+    linkedList.insertPosition(4, +faker.random.numeric(5));
+
+    expect(linkedList.size).toBe(4);
+  });
+
   it("should return null if [delete] a [Node] in a empty [LinkedList]", () => {
     const linkedList = new LinkedList<string>();
 
@@ -253,9 +265,7 @@ describe("Singly [LinkedList]", () => {
     expect(deleteResult).toBe(tail);
     expect(linkedList.tail?.value).toBe(nextTail);
   });
-});
 
-describe("Singly [LinkedList] - Non-Primitive value", () => {
   it("should create a [LinkedList] with object [Node]", () => {
     const node = new Node<Person>(new Person(faker.name.fullName(), +faker.random.numeric(2)));
     const linkedList = new LinkedList<Person>(node);
