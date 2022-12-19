@@ -163,7 +163,7 @@ export class LinkedList<T> implements ILinkedList<T> {
 
     let current = this.#head;
 
-    while (current.next?.next != null) current = current.next;
+    while (current.next!.next != null) current = current.next!;
 
     const deletedNode = current.next as Node<T>;
     current.next = null;
