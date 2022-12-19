@@ -19,7 +19,7 @@ export class Person {
     return `Name: ${this.name}\tAge: ${this.age}`;
   }
 
-  isEqual(person: Person): boolean {
-    return person.name === this.name && person.age === this.age;
+  static isEqual(person: Person, compare: Person): boolean {
+    return person.name === compare.name && person.age === compare.age;
   }
 }

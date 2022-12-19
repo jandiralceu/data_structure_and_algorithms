@@ -61,7 +61,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     if (list.isEqual(value, comparator)) {
       return [1, list.value];
     } else {
-      const [index, result] = this.search(list.next, value);
+      const [index, result] = this.search(list.next, value, comparator);
 
       if (index === -1) return [-1];
       else return [index + 1, result];
@@ -137,7 +137,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       }
     }
 
-    return deletedNode?.value ?? null;
+    return deletedNode != null ? deletedNode.value : null;
   }
 
   // Delete the first element of a [LinkedList]
