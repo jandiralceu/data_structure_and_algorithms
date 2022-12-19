@@ -4,24 +4,34 @@ interface ILinkedList<T> {
   clean: () => void;
   append: (value: T) => void;
   prepend: (value: T) => void;
-  reverse: () => LinkedList<T>;
+  reverse: () => DoublyLinkedList<T>;
   deleteHead: () => T | null;
   deleteTail: () => T | null;
-  toPrint: (value: LinkedListProps<T>) => void;
+  toPrint: (value: Pointer<T>) => void;
 }
 
-type LinkedListProps<T> = Node<T> | null;
+type Pointer<T> = Node<T> | null;
 
 // Doubly [LinkedList]
-export class LinkedList<T> implements ILinkedList<T> {
-  #head: LinkedListProps<T>;
+export class DoublyLinkedList<T> implements ILinkedList<T> {
+  #head: Pointer<T>;
 
-  constructor(head: LinkedListProps<T> = null) {
+  constructor(head: Pointer<T> = null) {
     this.#head = head;
   }
 
-  get values(): LinkedListProps<T> {
+  get values(): Pointer<T> {
     return this.#head;
+  }
+
+  get tail(): Pointer<T> {
+    if (this.#head == null) return null;
+
+    let current = this.#head;
+
+    while (current.next != null) current = current.next;
+
+    return current;
   }
 
   get size(): number {
@@ -63,11 +73,11 @@ export class LinkedList<T> implements ILinkedList<T> {
     this.#head = newNode;
   }
 
-  reverse(): LinkedList<T> {
-    if (this.#head == null || this.#head.next == null) return new LinkedList<T>(this.#head);
+  reverse(): DoublyLinkedList<T> {
+    if (this.#head == null || this.#head.next == null) return new DoublyLinkedList<T>(this.#head);
 
-    let prev: LinkedListProps<T> = null;
-    let current: LinkedListProps<T> = this.#head;
+    let prev: Pointer<T> = null;
+    let current: Pointer<T> = this.#head;
 
     while (current != null) {
       prev = current.prev;
@@ -76,7 +86,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       current = current.prev;
     }
 
-    return new LinkedList<T>(prev!.prev);
+    return new DoublyLinkedList<T>(prev!.prev);
   }
 
   deleteHead(): T | null {
@@ -114,7 +124,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     return deletedNode;
   }
 
-  toPrint(value: LinkedListProps<T>): void {
+  toPrint(value: Pointer<T>): void {
     if (value == null) return;
     console.log(value.toString());
 
