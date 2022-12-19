@@ -1,27 +1,27 @@
-import { LinkedList } from "./linked_list";
 import { Node } from "./node";
-
 import { Person } from "@/00_helpers";
+import { SinglyLinkedList } from "./linked_list";
+
 import { faker } from "@faker-js/faker";
 
-describe("Singly [LinkedList]", () => {
-  it("should create an empty [LinkedList]", () => {
-    const linkedList = new LinkedList<number>();
+describe("SinglyLinkedList", () => {
+  it("should create an empty [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<number>();
 
     expect(linkedList.list).toBe(null);
     expect(linkedList.size).toBe(0);
   });
 
-  it("should create a [LinkedList] with a [Node]", () => {
+  it("should create a [SinglyLinkedList] with a [Node]", () => {
     const node = new Node<string>(faker.name.fullName());
-    const linkedList = new LinkedList<string>(node);
+    const linkedList = new SinglyLinkedList<string>(node);
 
     expect(linkedList.size).toBe(1);
     expect(linkedList.list?.value).toBe(node.value);
   });
 
-  it("should clean a [LinkedList]", () => {
-    const linkedList = new LinkedList<string>(new Node<string>(faker.name.fullName()));
+  it("should clean a [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>(new Node<string>(faker.name.fullName()));
 
     expect(linkedList.size).toBe(1);
 
@@ -31,24 +31,24 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.size).toBe(0);
   });
 
-  it("should return null for tail if [LinkedList] is empty", () => {
-    const linkedList = new LinkedList<string>();
+  it("should return null for tail if [SinglyLinkedList] is empty", () => {
+    const linkedList = new SinglyLinkedList<string>();
 
     expect(linkedList.tail).toBeNull();
   });
 
   it("should return the tail", () => {
     const nodeValue = faker.name.fullName();
-    const linkedList = new LinkedList<string>();
+    const linkedList = new SinglyLinkedList<string>();
 
     linkedList.append(nodeValue);
 
     expect(linkedList.tail?.value).toBe(nodeValue);
   });
 
-  it("should prepend a [Node] in the [LinkedList]", () => {
+  it("should prepend a [Node] in the [SinglyLinkedList]", () => {
     const node = new Node<string>(faker.name.fullName());
-    const linkedList = new LinkedList<string>(node);
+    const linkedList = new SinglyLinkedList<string>(node);
 
     const nextNodeValue = faker.name.fullName();
 
@@ -58,9 +58,9 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.size).toBe(2);
   });
 
-  it("should append a [Node] in the [LinkedList]", () => {
+  it("should append a [Node] in the [SinglyLinkedList]", () => {
     const node = new Node<string>(faker.name.fullName());
-    const linkedList = new LinkedList<string>(node);
+    const linkedList = new SinglyLinkedList<string>(node);
 
     const nextNodeValue = faker.name.fullName();
 
@@ -70,8 +70,8 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.tail?.value).toBe(nextNodeValue);
   });
 
-  it("should append a [Node] even if the [LinkedList] is empty", () => {
-    const linkedList = new LinkedList<string>();
+  it("should append a [Node] even if the [SinglyLinkedList] is empty", () => {
+    const linkedList = new SinglyLinkedList<string>();
 
     const nextNodeValue = faker.name.fullName();
 
@@ -81,8 +81,8 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.list?.value).toBe(nextNodeValue);
   });
 
-  it("should print all nodes in the [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should print all nodes in the [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
     const spyToPrint = jest.spyOn(linkedList, "toPrint");
 
     linkedList.append(faker.name.fullName());
@@ -95,8 +95,8 @@ describe("Singly [LinkedList]", () => {
     expect(spyToPrint).toBeCalledTimes(5);
   });
 
-  it("should search a [Node] in the [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should search a [Node] in the [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
     const name = faker.name.fullName();
 
     linkedList.append(faker.name.fullName());
@@ -110,8 +110,8 @@ describe("Singly [LinkedList]", () => {
     expect(found[1]).toBe(name);
   });
 
-  it("should search an invalid [Node] in the [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should search an invalid [Node] in the [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
 
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
@@ -123,8 +123,8 @@ describe("Singly [LinkedList]", () => {
     expect(found[0]).toBe(-1);
   });
 
-  it("should to try insertion in a invalid position", () => {
-    const linkedList = new LinkedList<string>();
+  it("should try insertion in a invalid position", () => {
+    const linkedList = new SinglyLinkedList<string>();
 
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
@@ -134,8 +134,8 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.size).toBe(3);
   });
 
-  it("should insert a [Node] in the first position of the [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should insert a [Node] in the first position of the [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
 
     linkedList.append(faker.name.fullName());
     linkedList.insertPosition(1, faker.name.fullName());
@@ -143,8 +143,8 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.size).toBe(2);
   });
 
-  it("should insert a [Node] in any valid position of the [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should insert a [Node] in any valid position of the [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
 
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
@@ -155,8 +155,8 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.size).toBe(5);
   });
 
-  it("should insert a [Node] in the end of the [LinkedList]", () => {
-    const linkedList = new LinkedList<number>();
+  it("should insert a [Node] in the end of the [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<number>();
 
     linkedList.append(+faker.random.numeric(5));
     linkedList.append(+faker.random.numeric(5));
@@ -167,8 +167,8 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.size).toBe(4);
   });
 
-  it("should return null if [delete] a [Node] in a empty [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should return null if [delete] a [Node] in a empty [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
 
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
@@ -179,8 +179,8 @@ describe("Singly [LinkedList]", () => {
     expect(deleteResult).toBeNull();
   });
 
-  it("should return the deleted value in a [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should return the deleted value in a [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
     const nodeValue = "Jandir A. Cutabiala";
 
     linkedList.append(faker.name.fullName());
@@ -193,24 +193,24 @@ describe("Singly [LinkedList]", () => {
   });
 
   it("should return null if [delete] an invalid [Node]", () => {
-    const linkedList = new LinkedList<string>();
+    const linkedList = new SinglyLinkedList<string>();
 
     const deleteResult = linkedList.delete(faker.name.fullName());
 
     expect(deleteResult).toBeNull();
   });
 
-  it("should return null if [deleteHead] in a empty [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should return null if [deleteHead] in a empty [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
     const deleteResult = linkedList.deleteHead();
 
     expect(deleteResult).toBeNull();
   });
 
-  it("should return the deleted [Node] value when [deleteHead]", () => {
+  it("should return the deleted [Node] value when [SinglyLinkedList]", () => {
     const headValue = faker.name.fullName();
     const nextHeadValue = faker.name.fullName();
-    const linkedList = new LinkedList<string>();
+    const linkedList = new SinglyLinkedList<string>();
 
     linkedList.append(headValue);
     linkedList.append(nextHeadValue);
@@ -223,8 +223,8 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.list?.value).toBe(nextHeadValue);
   });
 
-  it("should clean the [LinkedList] if delete the only [Node]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should clean the [SinglyLinkedList] if delete the only [Node]", () => {
+    const linkedList = new SinglyLinkedList<string>();
     const nodeValue = faker.name.fullName();
 
     linkedList.append(nodeValue);
@@ -233,16 +233,16 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.list).toBeNull();
   });
 
-  it("should return null if [deleteTail] in a empty [LinkedList]", () => {
-    const linkedList = new LinkedList<string>();
+  it("should return null if [deleteTail] in a empty [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<string>();
     const deleteResult = linkedList.deleteTail();
 
     expect(deleteResult).toBeNull();
   });
 
-  it("should [deleteTail] in the [LinkedList] with only one [Node]", () => {
+  it("should [deleteTail] in the [SinglyLinkedList] with only one [Node]", () => {
     const name = new Node<string>(faker.name.fullName());
-    const linkedList = new LinkedList<string>(name);
+    const linkedList = new SinglyLinkedList<string>(name);
 
     const deleteResult = linkedList.deleteTail();
 
@@ -250,10 +250,10 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.list).toBeNull();
   });
 
-  it("should [deleteTail] in the [LinkedList] with many [Node]", () => {
+  it("should [deleteTail] in the [SinglyLinkedList] with many [Node]", () => {
     const tail = faker.name.fullName();
     const nextTail = faker.name.fullName();
-    const linkedList = new LinkedList<string>();
+    const linkedList = new SinglyLinkedList<string>();
 
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
@@ -266,16 +266,16 @@ describe("Singly [LinkedList]", () => {
     expect(linkedList.tail?.value).toBe(nextTail);
   });
 
-  it("should create a [LinkedList] with object [Node]", () => {
+  it("should create a [SinglyLinkedList] with object [Node]", () => {
     const node = new Node<Person>(new Person(faker.name.fullName(), +faker.random.numeric(2)));
-    const linkedList = new LinkedList<Person>(node);
+    const linkedList = new SinglyLinkedList<Person>(node);
 
     expect(linkedList.size).toBe(1);
     expect(linkedList.list?.value).toBe(node.value);
   });
 
-  it("should print all classes [Nodes] in the [LinkedList]", () => {
-    const linkedList = new LinkedList<Person>();
+  it("should print all classes [Nodes] in the [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<Person>();
     const spyToPrint = jest.spyOn(linkedList, "toPrint");
 
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
@@ -289,8 +289,8 @@ describe("Singly [LinkedList]", () => {
     expect(spyToPrint).toBeCalledTimes(6);
   });
 
-  it("should search a class [Node] in the [LinkedList]", () => {
-    const linkedList = new LinkedList<Person>();
+  it("should search a class [Node] in the [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<Person>();
     const person = new Person(faker.name.fullName(), +faker.random.numeric(2));
 
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
@@ -306,8 +306,8 @@ describe("Singly [LinkedList]", () => {
     expect(found[1]).toBe(person);
   });
 
-  it("should return the deleted value in a [LinkedList]", () => {
-    const linkedList = new LinkedList<Person>();
+  it("should return the deleted value in a [SinglyLinkedList]", () => {
+    const linkedList = new SinglyLinkedList<Person>();
     const person = new Person(faker.name.fullName(), +faker.random.numeric(2));
 
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));

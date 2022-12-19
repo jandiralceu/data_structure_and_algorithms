@@ -5,7 +5,7 @@ type Key = number;
 type Pointer<T> = Node<T> | null;
 type SearchResult<T> = [Key, T?];
 
-interface ILinkedList<T> {
+interface ISinglyLinkedList<T> {
   append: (value: T) => void;
   prepend: (value: T) => void;
   insertPosition: (position: number, value: T) => void;
@@ -17,8 +17,7 @@ interface ILinkedList<T> {
   toPrint: (value: Pointer<T>) => void;
 }
 
-// Singly [LinkedList]
-export class LinkedList<T> implements ILinkedList<T> {
+export class SinglyLinkedList<T> implements ISinglyLinkedList<T> {
   #head: Pointer<T>;
 
   constructor(head: Pointer<T> = null) {
@@ -54,7 +53,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     return amount;
   }
 
-  /// Search for a [Node] inside the [LinkedList]
+  /// Search for a value inside the [SinglyLinkedList]
   search(list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T> {
     if (list == null) return [-1];
 
@@ -68,7 +67,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     }
   }
 
-  // prepend methods adds a [Node] object to the beginning of [LinkedList].
+  // Add a [Node] in the beginning of [SinglyLinkedList].
   prepend(value: T): void {
     const newNode = new Node<T>(value, this.#head);
     newNode.next = this.#head;
@@ -76,7 +75,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     this.#head = newNode;
   }
 
-  // append methods adds a [Node] object to the end of [LinkedList].
+  // Add a [Node] to the end of [SinglyLinkedList].
   append(value: T): void {
     const newNode = new Node<T>(value);
 
@@ -91,7 +90,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     tail.next = newNode;
   }
 
-  // Insert a [Node] into any position of [LinkedList]
+  // Insert a [Node] into any position of [SinglyLinkedList]
   insertPosition(position: number, value: T): void {
     const newNode = new Node<T>(value);
 
@@ -113,7 +112,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     current.next = newNode;
   }
 
-  // delete any value, in any position of the [LinkedList].
+  // delete any value in the [SinglyLinkedList].
   delete(value: T, comparator?: ListNodeComparator<T>): T | null {
     if (this.#head == null) return null;
 
@@ -138,7 +137,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     return deletedNode != null ? deletedNode.value : null;
   }
 
-  // Delete the first element of a [LinkedList]
+  // Delete the first element of a [SinglyLinkedList]
   deleteHead(): T | null {
     if (this.#head == null) return null;
 
@@ -148,7 +147,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     return deletedNode;
   }
 
-  // Delete the last element of a [LinkedList]
+  // Delete the last element of a [SinglyLinkedList]
   deleteTail(): T | null {
     if (this.#head == null) return null;
 
@@ -169,7 +168,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     return deletedNode.value;
   }
 
-  // Print [LinkedList] values
+  // Print [SinglyLinkedList] values
   toPrint(value: Pointer<T>): void {
     if (value == null) return;
     console.log(value.toString());
@@ -177,7 +176,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     this.toPrint(value.next);
   }
 
-  // Clean the [LinkedList]
+  // Clean the [SinglyLinkedList]
   clean(): void {
     this.#head = null;
   }
