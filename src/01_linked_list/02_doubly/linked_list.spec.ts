@@ -31,10 +31,10 @@ describe("DoublyLinkedList", () => {
 
   it("should prepend a [Node] in a [DoublyLinkedList] empty", () => {
     const linkedList = new DoublyLinkedList<string>();
+    const nextNodeValue = faker.name.fullName();
 
     expect(linkedList.size).toBe(0);
 
-    const nextNodeValue = faker.name.fullName();
     linkedList.append(nextNodeValue);
 
     expect(linkedList.size).toBe(1);

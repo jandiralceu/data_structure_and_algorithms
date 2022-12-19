@@ -47,9 +47,7 @@ describe("SinglyLinkedList", () => {
   });
 
   it("should prepend a [Node] in the [SinglyLinkedList]", () => {
-    const node = new Node<string>(faker.name.fullName());
-    const linkedList = new SinglyLinkedList<string>(node);
-
+    const linkedList = new SinglyLinkedList<string>(new Node<string>(faker.name.fullName()));
     const nextNodeValue = faker.name.fullName();
 
     linkedList.prepend(nextNodeValue);
@@ -59,9 +57,7 @@ describe("SinglyLinkedList", () => {
   });
 
   it("should append a [Node] in the [SinglyLinkedList]", () => {
-    const node = new Node<string>(faker.name.fullName());
-    const linkedList = new SinglyLinkedList<string>(node);
-
+    const linkedList = new SinglyLinkedList<string>(new Node<string>(faker.name.fullName()));
     const nextNodeValue = faker.name.fullName();
 
     linkedList.append(nextNodeValue);
@@ -72,7 +68,6 @@ describe("SinglyLinkedList", () => {
 
   it("should append a [Node] even if the [SinglyLinkedList] is empty", () => {
     const linkedList = new SinglyLinkedList<string>();
-
     const nextNodeValue = faker.name.fullName();
 
     linkedList.append(nextNodeValue);
@@ -89,7 +84,6 @@ describe("SinglyLinkedList", () => {
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
-
     linkedList.toPrint(linkedList.list);
 
     expect(spyToPrint).toBeCalledTimes(5);
@@ -161,7 +155,6 @@ describe("SinglyLinkedList", () => {
     linkedList.append(+faker.random.numeric(5));
     linkedList.append(+faker.random.numeric(5));
     linkedList.append(+faker.random.numeric(5));
-
     linkedList.insertPosition(4, +faker.random.numeric(5));
 
     expect(linkedList.size).toBe(4);
@@ -194,7 +187,6 @@ describe("SinglyLinkedList", () => {
 
   it("should return null if [delete] an invalid [Node]", () => {
     const linkedList = new SinglyLinkedList<string>();
-
     const deleteResult = linkedList.delete(faker.name.fullName());
 
     expect(deleteResult).toBeNull();
@@ -243,7 +235,6 @@ describe("SinglyLinkedList", () => {
   it("should [deleteTail] in the [SinglyLinkedList] with only one [Node]", () => {
     const name = new Node<string>(faker.name.fullName());
     const linkedList = new SinglyLinkedList<string>(name);
-
     const deleteResult = linkedList.deleteTail();
 
     expect(deleteResult).toBe(name.value);
@@ -283,7 +274,6 @@ describe("SinglyLinkedList", () => {
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
-
     linkedList.toPrint(linkedList.list);
 
     expect(spyToPrint).toBeCalledTimes(6);
