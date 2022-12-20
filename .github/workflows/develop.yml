@@ -16,3 +16,7 @@ jobs:
         run: yarn lint:check
       - name: 🌡 Running tests
         run: yarn test:ci
+      - uses: codecov/codecov-action@v3
+        name: 🚀 Upload to codecov
+        with:
+          token: ${{ secrets.CODECOV_SECRET }}
