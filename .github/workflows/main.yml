@@ -1,4 +1,4 @@
-name: data_structure_develop
+name: data_structure_main
 on:
   push:
     branches:
