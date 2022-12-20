@@ -8,7 +8,7 @@ describe("SinglyLinkedList", () => {
   it("should create an empty [SinglyLinkedList]", () => {
     const linkedList = new SinglyLinkedList<number>();
 
-    expect(linkedList.list).toBe(null);
+    expect(linkedList.head).toBe(null);
     expect(linkedList.size).toBe(0);
   });
 
@@ -17,7 +17,7 @@ describe("SinglyLinkedList", () => {
     const linkedList = new SinglyLinkedList<string>(node);
 
     expect(linkedList.size).toBe(1);
-    expect(linkedList.list?.value).toBe(node.value);
+    expect(linkedList.head?.value).toBe(node.value);
   });
 
   it("should clean a [SinglyLinkedList]", () => {
@@ -27,7 +27,7 @@ describe("SinglyLinkedList", () => {
 
     linkedList.clean();
 
-    expect(linkedList.list).toBeNull();
+    expect(linkedList.head).toBeNull();
     expect(linkedList.size).toBe(0);
   });
 
@@ -52,7 +52,7 @@ describe("SinglyLinkedList", () => {
 
     linkedList.prepend(nextNodeValue);
 
-    expect(linkedList.list?.value).toBe(nextNodeValue);
+    expect(linkedList.head?.value).toBe(nextNodeValue);
     expect(linkedList.size).toBe(2);
   });
 
@@ -73,7 +73,7 @@ describe("SinglyLinkedList", () => {
     linkedList.append(nextNodeValue);
 
     expect(linkedList.size).toBe(1);
-    expect(linkedList.list?.value).toBe(nextNodeValue);
+    expect(linkedList.head?.value).toBe(nextNodeValue);
   });
 
   it("should print all nodes in the [SinglyLinkedList]", () => {
@@ -84,7 +84,7 @@ describe("SinglyLinkedList", () => {
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
-    linkedList.toPrint(linkedList.list);
+    linkedList.toPrint(linkedList.head);
 
     expect(spyToPrint).toBeCalledTimes(5);
   });
@@ -98,7 +98,7 @@ describe("SinglyLinkedList", () => {
     linkedList.append(name);
     linkedList.append(faker.name.fullName());
 
-    const found = linkedList.search(linkedList.list, name);
+    const found = linkedList.search(linkedList.head, name);
 
     expect(found).toHaveLength(2);
     expect(found[1]).toBe(name);
@@ -111,7 +111,7 @@ describe("SinglyLinkedList", () => {
     linkedList.append(faker.name.fullName());
     linkedList.append(faker.name.fullName());
 
-    const found = linkedList.search(linkedList.list, faker.name.fullName());
+    const found = linkedList.search(linkedList.head, faker.name.fullName());
 
     expect(found).toHaveLength(1);
     expect(found[0]).toBe(-1);
@@ -199,7 +199,7 @@ describe("SinglyLinkedList", () => {
     expect(deleteResult).toBeNull();
   });
 
-  it("should return the deleted [Node] value when [SinglyLinkedList]", () => {
+  it("should deleted the head [Node] in the [SinglyLinkedList]", () => {
     const headValue = faker.name.fullName();
     const nextHeadValue = faker.name.fullName();
     const linkedList = new SinglyLinkedList<string>();
@@ -212,7 +212,7 @@ describe("SinglyLinkedList", () => {
     const deletedHead = linkedList.deleteHead();
 
     expect(deletedHead).toBe(headValue);
-    expect(linkedList.list?.value).toBe(nextHeadValue);
+    expect(linkedList.head?.value).toBe(nextHeadValue);
   });
 
   it("should clean the [SinglyLinkedList] if delete the only [Node]", () => {
@@ -222,7 +222,7 @@ describe("SinglyLinkedList", () => {
     linkedList.append(nodeValue);
     linkedList.delete(nodeValue);
 
-    expect(linkedList.list).toBeNull();
+    expect(linkedList.head).toBeNull();
   });
 
   it("should return null if [deleteTail] in a empty [SinglyLinkedList]", () => {
@@ -238,7 +238,7 @@ describe("SinglyLinkedList", () => {
     const deleteResult = linkedList.deleteTail();
 
     expect(deleteResult).toBe(name.value);
-    expect(linkedList.list).toBeNull();
+    expect(linkedList.head).toBeNull();
   });
 
   it("should [deleteTail] in the [SinglyLinkedList] with many [Node]", () => {
@@ -262,7 +262,7 @@ describe("SinglyLinkedList", () => {
     const linkedList = new SinglyLinkedList<Person>(node);
 
     expect(linkedList.size).toBe(1);
-    expect(linkedList.list?.value).toBe(node.value);
+    expect(linkedList.head?.value).toBe(node.value);
   });
 
   it("should print all classes [Nodes] in the [SinglyLinkedList]", () => {
@@ -274,7 +274,7 @@ describe("SinglyLinkedList", () => {
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
-    linkedList.toPrint(linkedList.list);
+    linkedList.toPrint(linkedList.head);
 
     expect(spyToPrint).toBeCalledTimes(6);
   });
@@ -290,7 +290,7 @@ describe("SinglyLinkedList", () => {
     linkedList.append(new Person(faker.name.fullName(), +faker.random.numeric(2)));
     linkedList.append(person);
 
-    const found = linkedList.search(linkedList.list, person, Person.isEqual);
+    const found = linkedList.search(linkedList.head, person, Person.isEqual);
 
     expect(found).toHaveLength(2);
     expect(found[1]).toBe(person);

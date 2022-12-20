@@ -1,16 +1,20 @@
+import { ListNodeComparator } from "00_helpers";
 import { Node } from "./node";
+
+type Key = number;
+export type Pointer<T> = Node<T> | null;
+type SearchResult<T> = [Key, T?];
 
 export interface ILinkedList<T> {
   clean: () => void;
   append: (value: T) => void;
   prepend: (value: T) => void;
-  reverse: () => DoublyLinkedList<T>;
+  reverse: (head: Pointer<T>) => Pointer<T>;
   deleteHead: () => T | null;
   deleteTail: () => T | null;
   toPrint: (value: Pointer<T>) => void;
+  search: (list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>) => SearchResult<T>;
 }
-
-export type Pointer<T> = Node<T> | null;
 
 export class DoublyLinkedList<T> implements ILinkedList<T> {
   #head: Pointer<T>;
@@ -19,7 +23,21 @@ export class DoublyLinkedList<T> implements ILinkedList<T> {
     this.#head = head;
   }
 
-  get values(): Pointer<T> {
+  // Search for a value inside the [DoublyLinkedList]
+  search(list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>): SearchResult<T> {
+    if (list == null) return [-1];
+
+    if (list.isEqual(value, comparator)) {
+      return [1, list.value];
+    } else {
+      const [index, result] = this.search(list.next, value, comparator);
+
+      if (index === -1) return [-1];
+      else return [index + 1, result];
+    }
+  }
+
+  get head(): Pointer<T> {
     return this.#head;
   }
 
@@ -72,20 +90,20 @@ export class DoublyLinkedList<T> implements ILinkedList<T> {
     this.#head = newNode;
   }
 
-  reverse(): DoublyLinkedList<T> {
-    if (this.#head == null || this.#head.next == null) return new DoublyLinkedList<T>(this.#head);
+  reverse(): Pointer<T> {
+    if (this.#head == null || this.#head.next == null) return this.#head;
 
-    let prev: Pointer<T> = null;
+    let temp: Pointer<T> = null;
     let current: Pointer<T> = this.#head;
 
     while (current != null) {
-      prev = current.prev;
+      temp = current.prev;
       current.prev = current.next;
-      current.next = prev;
+      current.next = temp;
       current = current.prev;
     }
 
-    return new DoublyLinkedList<T>(prev!.prev);
+    return temp!.prev;
   }
 
   deleteHead(): T | null {
