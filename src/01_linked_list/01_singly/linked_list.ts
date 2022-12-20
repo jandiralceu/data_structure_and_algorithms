@@ -24,7 +24,7 @@ export class SinglyLinkedList<T> implements ISinglyLinkedList<T> {
     this.#head = head;
   }
 
-  get list(): Pointer<T> {
+  get head(): Pointer<T> {
     return this.#head;
   }
 

@@ -1,4 +1,7 @@
 [![codecov](https://codecov.io/gh/jandiralceu/data_structure_and_algorithms/branch/main/graph/badge.svg?token=JJC9PL9TNG)](https://codecov.io/gh/jandiralceu/data_structure_and_algorithms)
+![Github Actions](https://github.com/jandiralceu/data_structure_and_algorithms/actions/workflows/main.yml/badge.svg)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 # Data Structure and Algorithms
 
@@ -22,7 +25,3 @@ or
 ```
 npm run build
 ```
-
-## Contribute
-
-Feel free to improve this repository. Open a pull request to `develop`.
