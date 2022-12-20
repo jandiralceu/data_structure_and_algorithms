@@ -1,6 +1,6 @@
 import { Node } from "./node";
 
-interface ILinkedList<T> {
+export interface ILinkedList<T> {
   clean: () => void;
   append: (value: T) => void;
   prepend: (value: T) => void;
@@ -10,9 +10,8 @@ interface ILinkedList<T> {
   toPrint: (value: Pointer<T>) => void;
 }
 
-type Pointer<T> = Node<T> | null;
+export type Pointer<T> = Node<T> | null;
 
-// Doubly [LinkedList]
 export class DoublyLinkedList<T> implements ILinkedList<T> {
   #head: Pointer<T>;
 
