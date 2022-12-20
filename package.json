@@ -30,7 +30,7 @@
     "lint:eslint": "eslint --ext .ts --fix .",
     "lint:prettier": "prettier -w .",
     "lint:check": "prettier -c .",
-    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test": "jest --no-cache --runInBand",
     "test:staged": "yarn test --findRelatedTests",
     "test:watch": "yarn test --watch",
     "test:ci": "yarn test --coverage",
