@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/jandiralceu/data_structure_and_algorithms/branch/main/graph/badge.svg?token=JJC9PL9TNG)](https://codecov.io/gh/jandiralceu/data_structure_and_algorithms)
+
 # Data Structure and Algorithms
 
 This repository contains many data structure implementations using Typescript.
