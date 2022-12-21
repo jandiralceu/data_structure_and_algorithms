@@ -2,8 +2,8 @@ import { ListNodeComparator } from "@/00_helpers";
 import { Node } from "./node";
 
 type Key = number;
-type Pointer<T> = Node<T> | null;
 type SearchResult<T> = [Key, T?];
+export type Pointer<T> = Node<T> | null;
 
 interface ISinglyLinkedList<T> {
   append: (value: T) => void;
