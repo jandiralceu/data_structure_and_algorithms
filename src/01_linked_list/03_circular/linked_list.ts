@@ -6,21 +6,22 @@ interface ICircularLinkedList<T> {
   prepend: (value: T) => void;
   // insertPosition: (position: number, value: T) => void;
   // delete: (value: T) => T | null;
-  // deleteHead: () => T | null;
+  deleteHead: () => T | null;
   // deleteTail: () => T | null;
   // clean: () => void;
   // search: (list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>) => SearchResult<T>;
-  getSize: () => number;
-  toPrint: (comparator?: ListNodeComparator<T>) => void;
+  toPrint: () => void;
 }
 
 export class CircularLinkedList<T> implements ICircularLinkedList<T> {
   #head: Pointer<T>;
+  #comparator?: ListNodeComparator<T>;
 
-  constructor(head: Pointer<T> = null) {
+  constructor(head: Pointer<T> = null, comparator?: ListNodeComparator<T>) {
     if (head !== null) head.next = head;
 
     this.#head = head;
+    this.#comparator = comparator;
   }
 
   get head(): Pointer<T> {
@@ -34,7 +35,7 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
     do {
       current = current.next!;
-    } while (!current.next!.isEqual(this.#head.value));
+    } while (!current.next!.isEqual(this.#head.value, this.#comparator));
 
     return current;
   }
@@ -52,7 +53,7 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
     do {
       current = current.next!;
-    } while (!current.next!.isEqual(this.#head.value));
+    } while (!current.next!.isEqual(this.#head.value, this.#comparator));
 
     current.next = newNode;
     newNode.next = this.#head;
@@ -72,13 +73,29 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
     do {
       current = current.next!;
-    } while (!current.next!.isEqual(this.#head.value));
+    } while (!current.next!.isEqual(this.#head.value, this.#comparator));
 
     current.next = newNode;
     newNode.next = this.#head;
   }
 
-  getSize(comparator?: ListNodeComparator<T>): number {
+  deleteHead(): T | null {
+    if (this.#head == null) return null;
+
+    const deletedNode = this.#head.value;
+
+    if (this.#head.next!.isEqual(this.#head.value, this.#comparator)) {
+      this.#head = null;
+      return deletedNode;
+    }
+
+    this.#head.value = this.#head.next!.value;
+    this.#head.next = this.#head.next!.next;
+
+    return deletedNode;
+  }
+
+  get size(): number {
     if (this.#head == null) return 0;
 
     let amount = 0;
@@ -87,12 +104,12 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
     do {
       amount++;
       currentNode = currentNode.next!;
-    } while (!currentNode.isEqual(this.#head.value, comparator));
+    } while (!currentNode.isEqual(this.#head.value, this.#comparator));
 
     return amount;
   }
 
-  toPrint(comparator?: ListNodeComparator<T>): void {
+  toPrint(): void {
     if (this.#head == null) return;
 
     let currentNode = this.#head;
@@ -100,6 +117,6 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
     do {
       console.log(currentNode.toString());
       currentNode = currentNode.next!;
-    } while (!currentNode.isEqual(this.#head.value, comparator));
+    } while (!currentNode.isEqual(this.#head.value, this.#comparator));
   }
 }
