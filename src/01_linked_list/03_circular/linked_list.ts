@@ -2,7 +2,7 @@ import { Node, Pointer } from "../01_singly";
 import { ListNodeComparator } from "@/00_helpers";
 
 interface ICircularLinkedList<T> {
-  // append: (value: T) => void;
+  append: (value: T) => void;
   prepend: (value: T) => void;
   // insertPosition: (position: number, value: T) => void;
   // delete: (value: T) => T | null;
@@ -27,6 +27,18 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
     return this.#head;
   }
 
+  get tail(): Pointer<T> {
+    if (this.#head == null) return null;
+
+    let current = this.#head;
+
+    do {
+      current = current.next!;
+    } while (!current.next!.isEqual(this.#head.value));
+
+    return current;
+  }
+
   prepend(value: T): void {
     const newNode = new Node<T>(value);
 
@@ -45,6 +57,25 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
     current.next = newNode;
     newNode.next = this.#head;
     this.#head = newNode;
+  }
+
+  append(value: T): void {
+    const newNode = new Node<T>(value);
+
+    if (this.#head == null) {
+      newNode.next = newNode;
+      this.#head = newNode;
+      return;
+    }
+
+    let current = this.#head;
+
+    do {
+      current = current.next!;
+    } while (!current.next!.isEqual(this.#head.value));
+
+    current.next = newNode;
+    newNode.next = this.#head;
   }
 
   getSize(comparator?: ListNodeComparator<T>): number {

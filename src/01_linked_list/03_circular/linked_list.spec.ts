@@ -16,7 +16,13 @@ describe("CircularLinkedList", () => {
     expect(linkedList.getSize()).toBe(0);
   });
 
-  it("should [append] a [node] in the [CircularLinkedList]", () => {
+  it("should return [null] if trying to get [tail] in a [CircularLinkedList]", () => {
+    const linkedList = new CircularLinkedList<number>();
+
+    expect(linkedList.tail).toBeNull();
+  });
+
+  it("should [prepend] a [node] in the [CircularLinkedList]", () => {
     const linkedList = new CircularLinkedList<number>();
     const first = +faker.random.numeric(5);
     const second = +faker.random.numeric(5);
@@ -26,6 +32,27 @@ describe("CircularLinkedList", () => {
 
     expect(linkedList.getSize()).toBe(2);
     expect(linkedList.head?.value).toBe(second);
+  });
+
+  it("should [append] a [node] in the [CircularLinkedList]", () => {
+    const firstNode = new Node<string>(faker.random.words(5));
+    const linkedList = new CircularLinkedList<string>(firstNode);
+
+    const lastNode = faker.random.words(5);
+    linkedList.append(lastNode);
+
+    expect(linkedList.getSize()).toBe(2);
+    expect(linkedList.tail?.value).toBe(lastNode);
+  });
+
+  it("should [append] a [node] in the [CircularLinkedList] even if it's empty", () => {
+    const linkedList = new CircularLinkedList<string>();
+
+    const lastNode = faker.random.words(5);
+    linkedList.append(lastNode);
+
+    expect(linkedList.getSize()).toBe(1);
+    expect(linkedList.tail?.value).toBe(lastNode);
   });
 
   it("should print all nodes in the [CircularLinkedList]", () => {
