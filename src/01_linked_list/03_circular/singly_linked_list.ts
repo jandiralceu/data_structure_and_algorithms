@@ -1,7 +1,7 @@
 import { Node, Pointer } from "../01_singly";
 import { ListNodeComparator } from "@/00_helpers";
 
-interface ICircularLinkedList<T> {
+interface ICircularSinglyLinkedList<T> {
   append: (value: T) => void;
   prepend: (value: T) => void;
   // insertPosition: (position: number, value: T) => void;
@@ -13,7 +13,7 @@ interface ICircularLinkedList<T> {
   toPrint: () => void;
 }
 
-export class CircularLinkedList<T> implements ICircularLinkedList<T> {
+export class CircularSinglyLinkedList<T> implements ICircularSinglyLinkedList<T> {
   #head: Pointer<T>;
   #comparator?: ListNodeComparator<T>;
 
@@ -38,6 +38,20 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
     } while (!current.next!.isEqual(this.#head.value, this.#comparator));
 
     return current;
+  }
+
+  get size(): number {
+    if (this.#head == null) return 0;
+
+    let amount = 0;
+    let currentNode = this.#head;
+
+    do {
+      amount++;
+      currentNode = currentNode.next!;
+    } while (!currentNode.isEqual(this.#head.value, this.#comparator));
+
+    return amount;
   }
 
   prepend(value: T): void {
@@ -93,20 +107,6 @@ export class CircularLinkedList<T> implements ICircularLinkedList<T> {
     this.#head.next = this.#head.next!.next;
 
     return deletedNode;
-  }
-
-  get size(): number {
-    if (this.#head == null) return 0;
-
-    let amount = 0;
-    let currentNode = this.#head;
-
-    do {
-      amount++;
-      currentNode = currentNode.next!;
-    } while (!currentNode.isEqual(this.#head.value, this.#comparator));
-
-    return amount;
   }
 
   toPrint(): void {

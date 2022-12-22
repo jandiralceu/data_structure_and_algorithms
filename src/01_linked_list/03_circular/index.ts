@@ -1,1 +1,1 @@
-export { CircularLinkedList } from "./linked_list";
+export { CircularSinglyLinkedList as CircularLinkedList } from "./singly_linked_list";
