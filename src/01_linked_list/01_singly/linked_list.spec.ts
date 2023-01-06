@@ -20,17 +20,6 @@ describe("SinglyLinkedList", () => {
     expect(linkedList.head?.value).toBe(node.value);
   });
 
-  it("should clean a [SinglyLinkedList]", () => {
-    const linkedList = new SinglyLinkedList<string>(new Node<string>(faker.name.fullName()));
-
-    expect(linkedList.size).toBe(1);
-
-    linkedList.clean();
-
-    expect(linkedList.head).toBeNull();
-    expect(linkedList.size).toBe(0);
-  });
-
   it("should return null for tail if [SinglyLinkedList] is empty", () => {
     const linkedList = new SinglyLinkedList<string>();
 
@@ -115,49 +104,6 @@ describe("SinglyLinkedList", () => {
 
     expect(found).toHaveLength(1);
     expect(found[0]).toBe(-1);
-  });
-
-  it("should try insertion in a invalid position", () => {
-    const linkedList = new SinglyLinkedList<string>();
-
-    linkedList.append(faker.name.fullName());
-    linkedList.append(faker.name.fullName());
-    linkedList.append(faker.name.fullName());
-    linkedList.insertPosition(6, faker.name.fullName());
-
-    expect(linkedList.size).toBe(3);
-  });
-
-  it("should insert a [Node] in the first position of the [SinglyLinkedList]", () => {
-    const linkedList = new SinglyLinkedList<string>();
-
-    linkedList.append(faker.name.fullName());
-    linkedList.insertPosition(1, faker.name.fullName());
-
-    expect(linkedList.size).toBe(2);
-  });
-
-  it("should insert a [Node] in any valid position of the [SinglyLinkedList]", () => {
-    const linkedList = new SinglyLinkedList<string>();
-
-    linkedList.append(faker.name.fullName());
-    linkedList.append(faker.name.fullName());
-    linkedList.append(faker.name.fullName());
-    linkedList.append(faker.name.fullName());
-    linkedList.insertPosition(3, faker.name.fullName());
-
-    expect(linkedList.size).toBe(5);
-  });
-
-  it("should insert a [Node] in the end of the [SinglyLinkedList]", () => {
-    const linkedList = new SinglyLinkedList<number>();
-
-    linkedList.append(+faker.random.numeric(5));
-    linkedList.append(+faker.random.numeric(5));
-    linkedList.append(+faker.random.numeric(5));
-    linkedList.insertPosition(4, +faker.random.numeric(5));
-
-    expect(linkedList.size).toBe(4);
   });
 
   it("should return null if [delete] a [Node] in a empty [SinglyLinkedList]", () => {

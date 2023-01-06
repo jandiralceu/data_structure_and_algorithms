@@ -6,7 +6,6 @@ export type Pointer<T> = Node<T> | null;
 type SearchResult<T> = [Key, T?];
 
 export interface ILinkedList<T> {
-  clean: () => void;
   append: (value: T) => void;
   prepend: (value: T) => void;
   reverse: (head: Pointer<T>) => Pointer<T>;
@@ -112,7 +111,7 @@ export class DoublyLinkedList<T> implements ILinkedList<T> {
     const deletedNode = this.#head.value;
 
     if (this.#head.next == null) {
-      this.clean();
+      this.#head = null;
       return deletedNode;
     }
 
@@ -127,7 +126,7 @@ export class DoublyLinkedList<T> implements ILinkedList<T> {
 
     if (this.#head.next == null) {
       const deletedNode = this.#head.value;
-      this.clean();
+      this.#head = null;
 
       return deletedNode;
     }
@@ -146,9 +145,5 @@ export class DoublyLinkedList<T> implements ILinkedList<T> {
     console.log(value.toString());
 
     this.toPrint(value.next);
-  }
-
-  clean(): void {
-    this.#head = null;
   }
 }
