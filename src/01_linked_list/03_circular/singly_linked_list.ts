@@ -4,12 +4,9 @@ import { ListNodeComparator } from "@/00_helpers";
 interface ICircularSinglyLinkedList<T> {
   append: (value: T) => void;
   prepend: (value: T) => void;
-  // insertPosition: (position: number, value: T) => void;
-  // delete: (value: T) => T | null;
   deleteHead: () => T | null;
-  // deleteTail: () => T | null;
-  // clean: () => void;
-  // search: (list: Pointer<T>, value: T, comparator?: ListNodeComparator<T>) => SearchResult<T>;
+  deleteTail: () => T | null;
+  // search: (list: Pointer<T>, value: T) => Node<T> | null;
   toPrint: () => void;
 }
 
@@ -107,6 +104,28 @@ export class CircularSinglyLinkedList<T> implements ICircularSinglyLinkedList<T>
     this.#head.next = this.#head.next!.next;
 
     return deletedNode;
+  }
+
+  deleteTail(): T | null {
+    if (this.#head == null) return null;
+
+    if (this.size === 1) {
+      const deletedNode = this.#head.value;
+      this.#head = null;
+
+      return deletedNode;
+    }
+
+    let currentNode = this.#head;
+
+    do {
+      currentNode = currentNode.next!;
+    } while (!currentNode.next!.next!.isEqual(this.#head.value, this.#comparator));
+
+    const deletedNode = currentNode.next as Node<T>;
+    currentNode.next = this.#head;
+
+    return deletedNode.value;
   }
 
   toPrint(): void {

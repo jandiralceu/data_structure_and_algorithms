@@ -28,11 +28,11 @@ describe("CircularSinglyLinkedList", () => {
     const first = +faker.random.numeric(5);
     const second = +faker.random.numeric(5);
 
-    linkedList.prepend(first);
     linkedList.prepend(second);
+    linkedList.prepend(first);
 
     expect(linkedList.size).toBe(2);
-    expect(linkedList.head!.value).toBe(second);
+    expect(linkedList.head?.isEqual(first)).toBe(true);
   });
 
   it("should [append] a [node] in the [CircularSinglyLinkedList]", () => {
@@ -116,5 +116,40 @@ describe("CircularSinglyLinkedList", () => {
     expect(linkedList.size).toBe(4);
     expect(linkedList.head!.value).toBe(nextHeadValue);
     expect(deletedNodeValue).toBe(headValue);
+  });
+
+  it("should return null if [deleteTail] in a empty [CircularSinglyLinkedList]", () => {
+    const linkedList = new CircularSinglyLinkedList<string>();
+    const deleteResult = linkedList.deleteTail();
+
+    expect(deleteResult).toBeNull();
+  });
+
+  it("should [deleteTail] in the [CircularSinglyLinkedList] with only one [Node]", () => {
+    const name = new Node<string>(faker.name.fullName());
+    const linkedList = new CircularSinglyLinkedList<string>(name);
+    const deleteResult = linkedList.deleteTail();
+
+    expect(deleteResult).toBe(name.value);
+    expect(linkedList.head).toBeNull();
+  });
+
+  it("should [deleteTail] in the [CircularSinglyLinkedList]", () => {
+    const linkedList = new CircularSinglyLinkedList<string>();
+    const headValue = faker.name.fullName();
+    const newTailValue = faker.name.fullName();
+    const tailValue = faker.name.fullName();
+
+    linkedList.append(headValue);
+    linkedList.append(faker.name.fullName());
+    linkedList.append(faker.name.fullName());
+    linkedList.append(newTailValue);
+    linkedList.append(tailValue);
+
+    const deleteResult = linkedList.deleteTail();
+
+    expect(deleteResult).toBe(tailValue);
+    expect(linkedList.tail?.value).toBe(newTailValue);
+    expect(linkedList.tail?.next?.value).toBe(headValue);
   });
 });
