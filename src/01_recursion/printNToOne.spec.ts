@@ -9,4 +9,11 @@ describe("printNToOne", () => {
 
     expect(spyPrintNToOne).toHaveBeenCalledTimes(value + 1);
   });
+
+  it("should call once if value is equals to 0", () => {
+    const spyPrintNToOne = jest.spyOn(recursion, "printNToOne");
+    recursion.printNToOne(0);
+
+    expect(spyPrintNToOne).toHaveBeenCalledTimes(1);
+  });
 });
