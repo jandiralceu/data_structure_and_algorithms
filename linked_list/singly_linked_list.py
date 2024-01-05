@@ -58,6 +58,7 @@ class LinkedList:
         
         raise ValueError("Value not found in the list")
     
+    
     def pop(self):
         if self.head is None:
             return None
@@ -90,8 +91,8 @@ class LinkedList:
         else:
             self.append(value)
         
-            
-    def size(self):
+    
+    def __len__(self):
         counter = 0
         node = self.head
         while node:
