@@ -1,4 +1,4 @@
-from node import Node
+from helpers.node import Node
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -134,7 +134,7 @@ class LinkedList:
         return new_list
 
     @staticmethod
-    def iscircular(linked_list):
+    def is_circular(linked_list):
         """
         Determine wether the Linked List is circular or not
 
