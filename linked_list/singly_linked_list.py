@@ -1,7 +1,8 @@
 from helpers.node import Node
+
 class LinkedList:
-    def __init__(self):
-        self.head = None
+    def __init__(self, node: Node = None):
+        self.head = node
     
     def __iter__(self):
         node = self.head
@@ -162,6 +163,5 @@ class LinkedList:
         # If we get to a node where fast doesn't have a next node or doesn't exist itself,
         # the list has an end and isn't circular
         return False
-
 
 
