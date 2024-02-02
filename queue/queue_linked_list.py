@@ -1,13 +1,13 @@
-from typing import TypeVar, Generic
-# from helpers import Node
-
-
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
+from dataclasses import dataclass, field
+from typing import TypeVar, Generic, Optional
 
 T = TypeVar('T')
+
+@dataclass(kw_only=True)
+class Node(Generic[T]):
+    value: T
+    next: Optional['Node'] = field(default=None, init=False)
+
 
 class Queue(Generic[T]):
     def __init__(self) -> None:
@@ -17,7 +17,7 @@ class Queue(Generic[T]):
     
     
     def enqueue(self, value: T) -> None:
-        new_node = Node(value=value)
+        new_node = Node[T](value=value)
         
         if self.head is None:
             self.head = new_node
@@ -30,7 +30,7 @@ class Queue(Generic[T]):
     
     
     def dequeue(self) -> T:
-        if self.is_empty():
+        if self.is_empty:
             return None
         
         front = self.head.value
@@ -40,15 +40,19 @@ class Queue(Generic[T]):
         
         return front
     
-    
+    @property
     def size(self) -> int:
         return self.num_elements
     
     
+    @property
     def is_empty(self) -> bool:
         return self.head is None
-    
 
-queue = Queue[int]()
-queue.enqueue("Teste")
-print(queue.num_elements)
+
+queue = Queue[str]()
+queue.enqueue("Hello")
+queue.enqueue("World")
+queue.enqueue("It's Jandir")
+
+print(queue.size)
